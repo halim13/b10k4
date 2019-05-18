@@ -8,10 +8,10 @@
 </head>
 <body>
 	<?php  
+	// buat array baru
+	$arr=[];
 	// buat fungsi generateString
 	function generateString($jumlah){
-		// buat array baru
-		$arr=[];
 		// inisialisasi index 
 		$index=0;
 		// buat perulangan menghitung jumlah string yang akan di tampilkan 
@@ -32,35 +32,46 @@
 				$string .=$karakter[$acak];
 			}
 			// masukkan string ke array baru
-			$arr[$i]=$string;
+			$GLOBALS['arr'][$i]=$string;
+		}
+		// tampilkan data array baru
+		print_r($GLOBALS['arr']);
+	}
 
-			$jumlahArr=count($arr)-1;
-			$no=0;
-			// perulangan mencari duplikat isi
-			while ($no!=$jumlahArr) {
-				for ($j=0; $j < $jumlahArr; $j++) { 
-					if ($arr[$j]==$string) {
-						$no=0;
-						// echo "true ";
-						for ($j=0; $j < $jumlahna; $j++) { 
-							// acak karakter
-							$acak=rand(0,$panjangKarakter-1);
-							// masukkan karakter yang di acak ke dalam string
-							$string .=$karakter[$acak];
-						}
-						// masukkan string ke array baru
-						$arr[$i]=$string;
-					}else{
-						// echo "false ";
-						$no++;
-					}
+	// buat fugsi cek duplikasi
+	function cekDuplikasi($data){
+		// hitungpanjang array
+		$jumlah=count($data);
+		// buat kondisi data duplikat
+		$ada=false;
+		// buat perulangan mencari data duplkat
+		for ($i=0; $i < $jumlah; $i++) { 
+			for ($j=$i+1; $j < $jumlah; $j++) { 
+				if ($data[$j]==$data[$i])
+				{
+					// jika ada
+					$ada=true;
+				}
+				else
+				{
+					// jika tidak
+					$ada=false;
 				}
 			}
 		}
-		print_r($arr);
+		// buat kondisi jika data ada.
+		if ($ada) {
+			// jika iya
+			echo "ada data yang sama!";
+		}else{
+			// jika tidak
+			echo "tidak ada data yang sama!";
+		}
 	}
-	// panggil fungsi generateString
+	// panggil fungsi generate string
 	print(generateString(5));
+	// panggil fngsi cek duplikasi
+	print_r(cekDuplikasi($arr));
 	?>
 </body>
 </html>
